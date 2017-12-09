@@ -1,0 +1,11 @@
+html {
+  font-size: 15px;
+}
+
+body {
+  margin: 0;
+  background-color: black;
+  color: white;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+}
