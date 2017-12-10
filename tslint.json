@@ -1,6 +1,9 @@
 {
   "defaultSeverity": "error",
   "extends": ["tslint:recommended", "tslint-config-prettier"],
+  "cliOptions": {
+    "exclude": ["src/js/lib/three/examples"]
+  },
   "jsRules": {},
   "rules": {
     "ban": false,
@@ -14,9 +17,13 @@
     "max-classes-per-file": [true, 3],
     "member-ordering": [
       true,
-      "public-before-private",
-      "static-before-instance",
-      "variables-before-functions"
+      {
+        "order": [
+          "public-before-private",
+          "static-before-instance",
+          "variables-before-functions"
+        ]
+      }
     ],
     "no-any": false,
     "no-arg": true,
@@ -33,7 +40,7 @@
     "no-string-literal": true,
     "no-submodule-imports": false,
     "no-switch-case-fall-through": true,
-    "trailing-comma": [false, {"multiline": "never", "singleline": "never"}],
+    "trailing-comma": [false, { "multiline": "never", "singleline": "never" }],
     "no-unused-expression": true,
     "no-unused-variable": [false],
     "no-use-before-declare": false,

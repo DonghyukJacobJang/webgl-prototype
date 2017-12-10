@@ -12,6 +12,11 @@ const plugins = [
     template: './src/html/index.ejs',
     filename: '../index.html',
     showErrors: true
+  }),
+  new webpack.DefinePlugin({
+    'process.env': {
+      DEV: !production
+    }
   })
 ];
 if (production) {
@@ -32,24 +37,15 @@ module.exports = {
     loaders: [
       {
         test: /\.ts$/,
-        exclude: /node_modules/,
+        exclude: '/node_modules/',
         loader: 'babel-loader!ts-loader'
       },
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: '/node_modules/',
         loader: 'babel-loader',
         query: {
-          presets: [
-            [
-              '@babel/preset-env',
-              {
-                targets: {
-                  browsers: ['last 2 versions', 'safari >= 7']
-                }
-              }
-            ]
-          ]
+          presets: ['es2015', 'stage-0']
         }
       }
     ]
