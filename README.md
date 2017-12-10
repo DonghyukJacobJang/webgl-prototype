@@ -19,6 +19,12 @@ A small boilerplate for prototyping with WebGL.
 * `yarn run lint` Lint your ts code
 * `yarn run three-examples` Convert three example files to es6 modules
 
+**Flags**
+
+Open the following url to enable all debug helpers.
+
+http://localhost:8080/?gui&helpers&stats
+
 **Editor**
 
 If you use vscode you can add glsl syntax highlighting for `.glsl.ts` files.
