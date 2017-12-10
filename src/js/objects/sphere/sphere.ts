@@ -1,9 +1,10 @@
-import { Mesh, MeshLambertMaterial, SphereBufferGeometry } from 'three';
+import { Mesh, MeshLambertMaterial, ShaderMaterial, SphereBufferGeometry } from 'three';
 import MaterialModifier from 'three-material-modifier';
 import Shader from './shader.glsl';
 
 export default class Sphere {
   public mesh: Mesh;
+  private material: ShaderMaterial;
 
   constructor() {
     const geometry = new SphereBufferGeometry(1, 64, 64);
@@ -28,11 +29,11 @@ export default class Sphere {
           postFragColor: Shader.fragmentShader.postFragColor
         }
       });
-    const material = new ExtendedLambertMaterial();
-    this.mesh = new Mesh(geometry, material);
+    this.material = new ExtendedLambertMaterial();
+    this.mesh = new Mesh(geometry, this.material);
   }
 
   public update(delta: number) {
-    this.mesh.material.uniforms.uTime.value += delta;
+    this.material.uniforms.uTime.value += delta;
   }
 }
