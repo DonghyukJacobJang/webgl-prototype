@@ -99,8 +99,14 @@ shell.ls(TEXTURES_DIR).forEach(directory => {
       // Create destination path
       const destinationDirectory = `${DESTINATION_DIR}/${directory}`;
 
-      // Remove old files
-      shell.rm('-rf', destinationDirectory);
+      // Remove old texture files
+      shell.ls(destinationDirectory).forEach(file => {
+        const extension = fileExtension(file);
+        if (/(jpg|png)$/i.test(extension)) {
+          const fullPath = `${destinationDirectory}/${file}`;
+          shell.rm(fullPath);
+        }
+      });
 
       // Make directory if it doesn't exist
       shell.mkdir('-p', destinationDirectory);
