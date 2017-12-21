@@ -7,5 +7,6 @@ body {
   background-color: black;
   color: white;
   font-size: 1rem;
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
 }
