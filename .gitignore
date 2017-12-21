@@ -4,3 +4,4 @@ bundle.min.js
 npm-debug.log
 .DS_Store
 *.js.map
+.eslintcache
