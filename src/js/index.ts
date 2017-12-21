@@ -10,6 +10,7 @@ import { setQuery } from './params';
 import renderer from './renderer';
 import scene from './scene';
 import { guiFlags } from './utils/gui';
+import AssetLoader from './utils/loading/asset-loader';
 import stats from './utils/stats';
 
 // Objects
@@ -67,6 +68,14 @@ class WebGLPrototype {
 
     // Listeners
     window.addEventListener('resize', this.onResize, false);
+
+    AssetLoader('default', assets)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
 
     this.update();
   }
