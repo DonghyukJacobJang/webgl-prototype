@@ -8,10 +8,10 @@ shell.mkdir('-p', DEST_DIR);
 
 const files = [`${EXAMPLES_DIR}/controls/OrbitControls.js`];
 
-var regexp = /THREE\./g;
+const regexp = /THREE\./g;
 
 function template(dependencies, src, cls) {
-  var dependenciesFormatted = '';
+  let dependenciesFormatted = '';
   dependencies.forEach(dependency => {
     dependenciesFormatted += `${dependency}, \n`;
   });
@@ -40,12 +40,11 @@ files.forEach(file => {
 
   // Find all occurances of THREE.
   const occurances = contents.match(/THREE.\b(\w|')+\b/gim) || [];
-  var imports = [];
-  var count = 0;
+  let imports = [];
 
   // Filename needs to match the variable name
-  var className = filename.split('.')[0];
-  occurances.forEach((occurance, i) => {
+  const className = filename.split('.')[0];
+  occurances.forEach(occurance => {
     // Make sure THREE is in the occurance
     if (occurance.indexOf('THREE') !== -1) {
       const dependency = occurance.replace(regexp, '');
@@ -56,19 +55,17 @@ files.forEach(file => {
     }
   });
 
-  imports = imports.filter(function(item, pos) {
-    return imports.indexOf(item) == pos;
-  });
+  imports = imports.filter((item, pos) => imports.indexOf(item) === pos);
 
   // Remove all THREE.
   const source = contents.replace(regexp, '');
   const tmpl = template(imports, source, className);
 
   // Write file
-  fs.writeFile(`${DEST_DIR}/${filename}`, tmpl, function(error) {
+  fs.writeFile(`${DEST_DIR}/${filename}`, tmpl, error => {
     if (error) {
-      return console.log(error);
+      return console.log(error); // eslint-disable-line no-console
     }
-    console.log(`${file} > ${filename}`);
+    return console.log(`${file} > ${filename}`); // eslint-disable-line no-console
   });
 });
