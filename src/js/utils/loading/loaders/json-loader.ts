@@ -1,10 +1,8 @@
-const ee = require('event-emitter');
-import Asset from '../asset';
+import Loader from './loader';
 
-export default class JsonLoader {
-  public asset: Asset;
+export default class JsonLoader extends Loader {
   constructor(asset) {
-    ee(this);
+    super();
     this.asset = asset;
   }
 

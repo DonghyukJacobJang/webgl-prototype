@@ -1,11 +1,9 @@
-const ee = require('event-emitter');
 import { TextureLoader } from 'three';
-import Asset from '../asset';
+import Loader from './loader';
 
-export default class Loader {
-  public asset: Asset;
+export default class WebGLTextureLoader extends Loader {
   constructor(asset) {
-    ee(this);
+    super();
     this.asset = asset;
   }
 
@@ -17,7 +15,9 @@ export default class Loader {
       this.emit('loaded', this.asset);
     };
 
-    function onProgress() {}
+    function onProgress() {
+      return;
+    }
 
     const onError = () => {
       this.emit('error', `Failed to load ${this.asset.src}`);

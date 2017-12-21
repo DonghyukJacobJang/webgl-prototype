@@ -1,10 +1,8 @@
-const ee = require('event-emitter');
-import Asset from '../asset';
+import Loader from './loader';
 
-export default class ImageLoader {
-  public asset: Asset;
+export default class ImageLoader extends Loader {
   constructor(asset) {
-    ee(this);
+    super();
     this.asset = asset;
   }
 
