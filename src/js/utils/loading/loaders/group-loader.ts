@@ -44,26 +44,26 @@ export default class GroupLoader {
     if (this.total === 0) {
       this.emit('loaded', []);
     } else {
-      this._load();
+      this.loadNextInQueue();
     }
   }
 
-  private _load() {
+  private loadNextInQueue() {
     if (this.queue < this.total) {
       if (this.currentParallel < this.parallelLoads) {
         const loader = this.loaders[this.queue];
         this.queue += 1;
         this.currentParallel += 1;
         this.currentLoader += 1;
-        loader.once('loaded', this._onLoaded.bind(this));
-        loader.once('error', this._onError.bind(this));
+        loader.once('loaded', this.onLoaded.bind(this));
+        loader.once('error', this.onError.bind(this));
         loader.load();
-        this._load();
+        this.loadNextInQueue();
       }
     }
   }
 
-  private _onLoaded() {
+  private onLoaded() {
     this.loaded += 1;
     // console.log(`${this.id} loaded`, this.loaded, '/', this.total);
     if (this.loaded === this.total) {
@@ -74,11 +74,11 @@ export default class GroupLoader {
       this.emit('loaded', assets);
     } else {
       this.currentParallel -= 1;
-      this._load();
+      this.loadNextInQueue();
     }
   }
 
-  private _onError(error) {
+  private onError(error) {
     this.emit('error', error);
   }
 }
