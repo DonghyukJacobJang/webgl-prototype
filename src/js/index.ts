@@ -34,7 +34,7 @@ class WebGLPrototype {
     }
 
     // Lights
-    Object.keys(lights).forEach(light => {
+    Object.keys(lights).forEach((light: string) => {
       scene.add(lights[light]);
     });
 
@@ -58,9 +58,11 @@ class WebGLPrototype {
     this.clock = new Clock(true);
 
     // Flags
-    guiFlags.add(flags, 'debugCamera').onChange(val => {
-      setQuery('cameraDebug', val);
-    });
+    guiFlags
+      .add(flags, 'debugCamera')
+      .onChange((val: string | boolean | number) => {
+        setQuery('cameraDebug', val);
+      });
 
     // Objects
     this.sphere = new Sphere();
@@ -70,15 +72,19 @@ class WebGLPrototype {
     window.addEventListener('resize', this.onResize, false);
 
     AssetLoader('default', assets)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      .then(this.onAssetsLoaded)
+      .catch(this.onAssetsError);
 
     this.update();
   }
+
+  private onAssetsLoaded = (value: any) => {
+    console.log('assets loaded', value);
+  };
+
+  private onAssetsError = (error: any) => {
+    console.warn(error);
+  };
 
   private onResize = () => {
     cameras.dev.aspect = window.innerWidth / window.innerHeight;
