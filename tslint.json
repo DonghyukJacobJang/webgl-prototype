@@ -15,16 +15,8 @@
     "jsdoc-format": true,
     "label-position": true,
     "max-classes-per-file": [true, 3],
-    "member-ordering": [
-      true,
-      {
-        "order": [
-          "public-before-private",
-          "static-before-instance",
-          "variables-before-functions"
-        ]
-      }
-    ],
+    "max-line-length": [true, 120],
+    "member-ordering": [true, { "order": "fields-first" }],
     "no-any": false,
     "no-arg": true,
     "no-bitwise": false,
@@ -42,7 +34,7 @@
     "no-switch-case-fall-through": true,
     "trailing-comma": [false, { "multiline": "never", "singleline": "never" }],
     "no-unused-expression": true,
-    "no-unused-variable": [false],
+    "no-unused-variable": true,
     "no-use-before-declare": false,
     "no-var-keyword": true,
     "no-var-requires": false,
