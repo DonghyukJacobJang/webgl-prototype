@@ -1,9 +1,5 @@
-import {
-  AxisHelper,
-  Clock,
-  GridHelper,
-  PerspectiveCamera
-} from 'three';
+import { AxisHelper, Clock, GridHelper, PerspectiveCamera } from 'three';
+import assets from './assets';
 import cameras from './cameras';
 import { DEV_HELPERS, DEV_STATS } from './constants';
 import * as flags from './flags';
@@ -20,7 +16,6 @@ import stats from './utils/stats';
 import Sphere from './objects/sphere/sphere';
 
 class WebGLPrototype {
-
   private clock: Clock;
   private renderStats: RenderStats;
   private controls: any;
@@ -64,7 +59,7 @@ class WebGLPrototype {
     // Flags
     guiFlags.add(flags, 'debugCamera').onChange(val => {
       setQuery('cameraDebug', val);
-    })
+    });
 
     // Objects
     this.sphere = new Sphere();
@@ -84,9 +79,15 @@ class WebGLPrototype {
     cameras.main.updateProjectionMatrix();
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-  }
+  };
 
-  private render(camera: PerspectiveCamera, left: number, bottom: number, width: number, height: number) {
+  private render(
+    camera: PerspectiveCamera,
+    left: number,
+    bottom: number,
+    width: number,
+    height: number
+  ) {
     left *= window.innerWidth;
     bottom *= window.innerHeight;
     width *= window.innerWidth;
@@ -124,8 +125,7 @@ class WebGLPrototype {
       this.renderStats.update(renderer);
       stats.end();
     }
-  }
+  };
 }
 
 export default new WebGLPrototype();
-
