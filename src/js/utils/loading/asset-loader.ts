@@ -1,9 +1,6 @@
 import Asset from './asset';
 import GroupLoader from './loaders/group-loader';
 
-/**
- * Loads all assets for a webgl scene
- */
 export default function load(id, assets) {
   return new Promise((resolve, reject) => {
     const loader = new GroupLoader(id);
